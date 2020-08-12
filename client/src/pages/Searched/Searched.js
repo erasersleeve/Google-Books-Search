@@ -32,11 +32,24 @@ function saveBook (id) {
   API.saveBook({
     title: savedBook[0].volumeInfo.title,
     author: savedBook[0].volumeInfo.authors[0],
-    synopsis: savedBook[0].volumeInfo.title
+    synopsis: savedBook[0].volumeInfo.title,
+    link: savedBook[0].volumeInfo.infoLink
     })
     .catch(err => console.log(err));
 }
 
+function searchBooks () {
+  if (searchObject.query) {
+    API.getBooks(searchObject.query
+    )
+      .then(res => {
+        setBooks(res.data);
+        console.log("getBooks Result: ", res.data);
+        // console.log("Books State: ", books)
+      }).then(console.log("Books State: ", books))
+      .catch(err => console.log(err));
+  }
+}
 
 
   // Deletes a book from the database with a given id, then reloads books from the db
@@ -57,16 +70,7 @@ function saveBook (id) {
     console.log("handleFormSubmit");
     event.preventDefault();
     console.log("query: ", searchObject.query);
-    if (searchObject.query) {
-      API.getBooks(searchObject.query
-      )
-        .then(res => {
-          setBooks(res.data);
-          console.log("getBooks Result: ", res.data);
-          // console.log("Books State: ", books)
-        }).then(console.log("Books State: ", books))
-        .catch(err => console.log(err));
-    }
+    searchBooks()
   };
 
     return (
@@ -111,7 +115,10 @@ function saveBook (id) {
                       </a>
                       {/* onClick needs the () => function() format so the function actally waits for the button click */}
                       <button className="btn" onClick={() => saveBook(book.id)}>Save Books!</button>
-                      {/* <SaveBtn onClick={() => deleteBook(book._id)} /> */}
+                      <button onClick={() => window.open(book.volumeInfo.infoLink)}>View Book</button>
+
+                      
+  
                     </ListItem>
                   );
                 })}

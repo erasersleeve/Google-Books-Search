@@ -26,6 +26,9 @@ function Saved() {
           .then(res => loadBooks())
           .catch(err => console.log(err));
       }
+      function viewBook(id) {
+          
+      }
 
     return (
         <>
@@ -38,13 +41,15 @@ function Saved() {
             {books.length ? (
                 <List>
                     {books.map(book => {
+                        let link = book.link
                         return (
                             <ListItem key={book._id}>
-                                <a href={"/books/" + book._id}>
+                                
                                     <strong>
                                         {book.title} by {book.author}
                                     </strong>
-                                </a>
+                                
+                                <button onClick={() => window.open(book.link)}>View Book</button>
                                 <button className="btn" onClick={() => deleteBook(book._id)}>Delete Book</button>
 
                             </ListItem>
