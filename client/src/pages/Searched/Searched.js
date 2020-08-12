@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Jumbotron from "../../components/Jumbotron";
+import Nav from "../../components/Nav";
 import API from "../../utils/API";
 import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
@@ -72,6 +73,7 @@ function saveBook (id) {
       <Container >
         {/* <Row> */}
           {/* <Col size="md-6"> */}
+          <Nav />
             <Jumbotron>
               <h1>Search Google Books' Database</h1>
             </Jumbotron>
