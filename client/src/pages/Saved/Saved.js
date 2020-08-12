@@ -21,6 +21,11 @@ function Saved() {
             .then(res => setBooks(res.data))
             .catch(err => console.log(err));
     };
+    function deleteBook(id) {
+        API.deleteBook(id)
+          .then(res => loadBooks())
+          .catch(err => console.log(err));
+      }
 
     return (
         <>
@@ -40,7 +45,7 @@ function Saved() {
                                         {book.title} by {book.author}
                                     </strong>
                                 </a>
-                                <button className="btn" onClick={() => console.log("!!!!!!!!!")}>Save Books!</button>
+                                <button className="btn" onClick={() => deleteBook(book._id)}>Delete Book</button>
 
                             </ListItem>
                         );
@@ -49,7 +54,6 @@ function Saved() {
             ) : (
                 <div>
                       <h3>No Results to Display</h3>
-                    <button className="btn" onClick={() => console.log("State Books: ", books)}>Save Books!</button>
                 </div>
                   
 
