@@ -8,7 +8,7 @@ import axios from "axios";
 // It accepts a "query" or term to search the recipe api for
 export default {
   getBooks: function(query) {
-    let content = axios.get("/api/google", { params: { q: query } })
+    // let content = axios.get("/api/google", { params: { q: query } })
     // console.log("API API API");
     // console.log(content);
     // console.log(content.Promise);
@@ -18,6 +18,10 @@ export default {
   saveBook: function(bookData) {
     console.log(bookData);
     return axios.post("/api/books", bookData);
+  },
+
+  getSavedBooks: function(bookData) {
+    return axios.get("/api/books")
   }
 };
 
